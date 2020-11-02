@@ -15,16 +15,20 @@ print(kernel)
 #     history：用于训练背景的帧数，默认为500帧，如果不手动设置learningRate，history就被用于计算当前的learningRate，此时history越大，learningRate越小，背景更新越慢；
 #     varThreshold：方差阈值，用于判断当前像素是前景还是背景。一般默认16，如果光照变化明显，如阳光下的水面，建议设为25,36，具体去试一下也不是很麻烦，值越大，灵敏度越低；
 #     detectShadows：是否检测影子，设为true为检测，false为不检测，检测影子会增加程序时间复杂度，如无特殊要求，建议设为false；
-model = cv2.createBackgroundSubtractorMOG2(history=200, varThreshold=25, detectShadows=True) # 初始化只有这3个参数，但是还有其他参数需要设置，比如高斯个数
+model = cv2.createBackgroundSubtractorMOG2(history=200, varThreshold=25, detectShadows=True)
 
 model.setNMixtures(5) # 设置混合高斯的个数
+
 # model.setBackgroundRatio只读参数，默认是0.9，高斯背景模型权重和阈值，nmixtures个模型按权重排序后，
 # 只取模型权重累加值大于backgroundRatio的前几个作为背景模型。也就是说如果该值取得非常小，
 # 很可能只使用权重最大的高斯模型作为背景(因为仅一个模型权重就大于backgroundRatio了
+
 # model.setVarThresholdGen 只读参数，默认是2.5*2.5，方差阈值，用于是否存在匹配的模型，如果不存在则新建一个
 
-print(model.setfVarInit)
-
+# 还有其他3个参数，暂时不知道获取的方法
+# fVarInit：新建高斯模型的方差初始值，默认15
+# fVarMax：背景更新过程中，用于限制高斯模型方差的最大值，默认20
+# fVarMin：背景更新过程中，用于限制高斯模型方差的最小值，默认4
 
 
 while 1:
